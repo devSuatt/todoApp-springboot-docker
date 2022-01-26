@@ -23,8 +23,7 @@ public class TodoAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = userRepository.save(new User("", "suat", "test123", new HashSet<>()));
-		System.out.println(user);
+
 	}
 
 }

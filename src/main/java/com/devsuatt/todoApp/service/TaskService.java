@@ -27,7 +27,7 @@ public class TaskService {
     public TaskDto createTask(CreateTaskRequestDto requestDto) {
         User user = userService.findCustomerById(requestDto.getUserId());
         Task task = new Task(requestDto.getTaskHeader(), requestDto.getTaskDescription(), user);
-        return converter.convert(task);
+        return converter.convert(taskRepository.save(task));
     }
 
 }

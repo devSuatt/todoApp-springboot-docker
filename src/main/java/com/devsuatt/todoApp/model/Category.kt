@@ -13,8 +13,8 @@ data class Category(
     val id: String?,
     val name: String?,
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    val tasks: Set<Task>? = emptySet(),
+//    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+//    val tasks: Set<Task>? = emptySet(),
 
 ) {
 
