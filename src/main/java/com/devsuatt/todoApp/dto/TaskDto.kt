@@ -10,9 +10,8 @@ data class TaskDto(
     val id: String?,
     val header: String?,
     val description: String?,
-    val creationDate: LocalDateTime?,
+    val transactionDate: LocalDateTime?,
     val taskType: TaskType? = TaskType.TODO,
-    val user: TaskUserDto?,
 //    val category: Category?,
 
     )

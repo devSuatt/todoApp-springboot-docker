@@ -5,21 +5,25 @@ import com.devsuatt.todoApp.dto.UserDto;
 import com.devsuatt.todoApp.model.User;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 @Component
 public class UserDtoConverter {
 
-    public UserDto convertToUserDto(User from) {
+    private final TaskDtoConverter taskDtoConverter;
+
+    public UserDtoConverter(TaskDtoConverter taskDtoConverter) {
+        this.taskDtoConverter = taskDtoConverter;
+    }
+
+    public UserDto convert(User from) {
         return new UserDto(from.getId(),
                 from.getUsername(),
                 from.getPassword(),
                 from.getTasks()
-        );
-    }
-
-    public TaskUserDto convertToTaskUserDto(User from) {
-        return new TaskUserDto(from.getId(),
-                from.getUsername(),
-                from.getPassword()
+                        .stream()
+                        .map(taskDtoConverter::convert)
+                        .collect(Collectors.toSet())
         );
     }
 

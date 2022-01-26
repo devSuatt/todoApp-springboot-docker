@@ -26,8 +26,8 @@ data class Task(
 
     ) {
 
-    constructor(header: String?, description: String?, transactionDate: LocalDateTime?, user: User) : this(
-        id = "",
+    constructor(header: String, description: String, transactionDate: LocalDateTime, user: User) : this(
+        "",
         header,
         description,
         transactionDate,
@@ -58,8 +58,6 @@ data class Task(
         result = 31 * result + (description?.hashCode() ?: 0)
         result = 31 * result + (transactionDate?.hashCode() ?: 0)
         result = 31 * result + (taskType?.hashCode() ?: 0)
-        result = 31 * result + (user?.hashCode() ?: 0)
-//        result = 31 * result + (category?.hashCode() ?: 0)
         return result
     }
 

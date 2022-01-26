@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskDtoConverter {
 
-    private final UserDtoConverter userDtoConverter;
+    private final TaskUserDtoConverter converter;
 
-    public TaskDtoConverter(UserDtoConverter userDtoConverter) {
-        this.userDtoConverter = userDtoConverter;
+    public TaskDtoConverter(TaskUserDtoConverter converter) {
+        this.converter = converter;
     }
 
     public TaskDto convert(Task from) {
@@ -18,8 +18,7 @@ public class TaskDtoConverter {
                 from.getHeader(),
                 from.getDescription(),
                 from.getTransactionDate(),
-                from.getTaskType(),
-                userDtoConverter.convertToTaskUserDto(from.getUser())
+                from.getTaskType()
 //                from.getCategory()
         );
     }

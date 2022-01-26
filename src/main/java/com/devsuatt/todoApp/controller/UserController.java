@@ -4,15 +4,13 @@ import com.devsuatt.todoApp.dto.CreateUserRequestDto;
 import com.devsuatt.todoApp.dto.UserDto;
 import com.devsuatt.todoApp.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/v1")
 public class UserController {
 
     private final UserService userService;
@@ -21,9 +19,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody CreateUserRequestDto requestDto) {
+    @PostMapping("/user")
+    public ResponseEntity<UserDto> createUser(
+            @Valid @RequestBody CreateUserRequestDto requestDto)
+    {
         return ResponseEntity.ok(userService.createUser(requestDto));
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<UserDto> getUserById(
+            @PathVariable String userId)
+    {
+        return ResponseEntity.ok(userService.getUserById(userId));
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDto>> getUsers() {
+        return ResponseEntity.ok(userService.getUsers());
     }
 
 }
