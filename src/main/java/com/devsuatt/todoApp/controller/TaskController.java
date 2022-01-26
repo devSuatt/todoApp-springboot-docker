@@ -4,6 +4,7 @@ import com.devsuatt.todoApp.dto.CreateTaskRequestDto;
 import com.devsuatt.todoApp.dto.TaskDto;
 import com.devsuatt.todoApp.dto.UpdateTaskRequestDto;
 import com.devsuatt.todoApp.service.TaskService;
+import com.devsuatt.todoApp.shared.GenericResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<TaskDto> createTask(
             @Valid @RequestBody CreateTaskRequestDto requestDto)
     {
@@ -34,5 +35,11 @@ public class TaskController {
         return ResponseEntity.ok(taskService.updateTask(id, requestDto));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
+        System.out.println("************************** => " + id);
+        taskService.deleteTask(id);
+        return ResponseEntity.ok(new GenericResponse("task deleted."));
+    }
 
 }

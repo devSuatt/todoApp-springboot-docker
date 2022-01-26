@@ -43,10 +43,16 @@ public class UserService {
     }
 
     public UserDto createUser(CreateUserRequestDto requestDto) {
-        User user = userRepository.save(new User( "", requestDto.getUsername(), requestDto.getPassword(), new HashSet<>()));
+        final User user = userRepository.save(new User( "",
+                requestDto.getUsername(),
+                requestDto.getPassword(),
+                new HashSet<>()));
         return userDtoConverter.convert(userRepository.save(user));
     }
 
-
+    public void deleteUserById(String id) {
+        final User user = findCustomerById(id);
+        userRepository.deleteById(user.getId());
+    }
 
 }

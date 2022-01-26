@@ -16,7 +16,7 @@ data class Task(
     val transactionDate: LocalDateTime? = LocalDateTime.now(),
     val taskType: TaskType? = TaskType.TODO,
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User? = null,
 

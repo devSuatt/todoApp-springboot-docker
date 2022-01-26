@@ -3,6 +3,7 @@ package com.devsuatt.todoApp.controller;
 import com.devsuatt.todoApp.dto.CreateUserRequestDto;
 import com.devsuatt.todoApp.dto.UserDto;
 import com.devsuatt.todoApp.service.UserService;
+import com.devsuatt.todoApp.shared.GenericResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,14 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
+    }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> deleteUserById(
+            @PathVariable String id)
+    {
+        userService.deleteUserById(id);
+        return ResponseEntity.ok(new GenericResponse("user deleted"));
     }
 
 }
