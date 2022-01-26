@@ -17,7 +17,7 @@ public class TaskDtoConverter {
         return new TaskDto(from.getId(),
                 from.getHeader(),
                 from.getDescription(),
-                from.getCreationDate(),
+                from.getTransactionDate(),
                 from.getTaskType(),
                 userDtoConverter.convertToTaskUserDto(from.getUser())
 //                from.getCategory()

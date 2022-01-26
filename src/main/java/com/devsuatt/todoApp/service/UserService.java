@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public UserDto createUser(CreateUserRequestDto requestDto) {
-        User user = userRepository.save(new User( "suat", "test123"));
+        User user = userRepository.save(new User( requestDto.getUsername(), requestDto.getPassword()));
         System.out.println(user);
         return userDtoConverter.convertToUserDto(userRepository.save(user));
     }

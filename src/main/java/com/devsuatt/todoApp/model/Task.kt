@@ -13,7 +13,7 @@ data class Task(
     var id: String?,
     val header: String? = null,
     val description: String? = null,
-    val creationDate: LocalDateTime? = LocalDateTime.now(),
+    val transactionDate: LocalDateTime? = LocalDateTime.now(),
     val taskType: TaskType? = TaskType.TODO,
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
@@ -26,11 +26,11 @@ data class Task(
 
     ) {
 
-    constructor(header: String?, description: String?, user: User) : this(
+    constructor(header: String?, description: String?, transactionDate: LocalDateTime?, user: User) : this(
         id = "",
         header,
         description,
-        LocalDateTime.now(),
+        transactionDate,
         TaskType.TODO,
         user
     )
@@ -44,7 +44,7 @@ data class Task(
         if (id != other.id) return false
         if (header != other.header) return false
         if (description != other.description) return false
-        if (creationDate != other.creationDate) return false
+        if (transactionDate != other.transactionDate) return false
         if (taskType != other.taskType) return false
         if (user != other.user) return false
 //        if (category != other.category) return false
@@ -56,7 +56,7 @@ data class Task(
         var result = id?.hashCode() ?: 0
         result = 31 * result + (header?.hashCode() ?: 0)
         result = 31 * result + (description?.hashCode() ?: 0)
-        result = 31 * result + (creationDate?.hashCode() ?: 0)
+        result = 31 * result + (transactionDate?.hashCode() ?: 0)
         result = 31 * result + (taskType?.hashCode() ?: 0)
         result = 31 * result + (user?.hashCode() ?: 0)
 //        result = 31 * result + (category?.hashCode() ?: 0)

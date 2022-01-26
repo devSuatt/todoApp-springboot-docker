@@ -5,8 +5,11 @@ import com.devsuatt.todoApp.dto.UserDto;
 import com.devsuatt.todoApp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/v1/user")
@@ -19,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(CreateUserRequestDto requestDto) {
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody CreateUserRequestDto requestDto) {
         return ResponseEntity.ok(userService.createUser(requestDto));
     }
 

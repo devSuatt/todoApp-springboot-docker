@@ -2,6 +2,7 @@ package com.devsuatt.todoApp.service;
 
 import com.devsuatt.todoApp.dto.CreateTaskRequestDto;
 import com.devsuatt.todoApp.dto.TaskDto;
+import com.devsuatt.todoApp.dto.UpdateTaskRequestDto;
 import com.devsuatt.todoApp.dto.converter.TaskDtoConverter;
 import com.devsuatt.todoApp.model.Task;
 import com.devsuatt.todoApp.model.TaskType;
@@ -26,7 +27,22 @@ public class TaskService {
 
     public TaskDto createTask(CreateTaskRequestDto requestDto) {
         User user = userService.findCustomerById(requestDto.getUserId());
-        Task task = new Task(requestDto.getTaskHeader(), requestDto.getTaskDescription(), user);
+        Task task = new Task(requestDto.getTaskHeader(),
+                requestDto.getTaskDescription(),
+                LocalDateTime.now(),
+                user);
+        return converter.convert(taskRepository.save(task));
+    }
+
+    public TaskDto updateTask(String id, UpdateTaskRequestDto requestDto) {
+        User user = userService.findCustomerById(requestDto.getUserId());
+        System.out.println(user.getUsername());
+        Task task = new Task(id,
+                requestDto.getTaskHeader(),
+                requestDto.getTaskDescription(),
+                LocalDateTime.now(),
+                requestDto.getTaskType(),
+                user);
         return converter.convert(taskRepository.save(task));
     }
 

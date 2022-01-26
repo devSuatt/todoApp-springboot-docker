@@ -2,6 +2,7 @@ package com.devsuatt.todoApp.controller;
 
 import com.devsuatt.todoApp.dto.CreateTaskRequestDto;
 import com.devsuatt.todoApp.dto.TaskDto;
+import com.devsuatt.todoApp.dto.UpdateTaskRequestDto;
 import com.devsuatt.todoApp.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,19 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskDto> createTask(@Valid @RequestBody CreateTaskRequestDto requestDto) {
+    public ResponseEntity<TaskDto> createTask(
+            @Valid @RequestBody CreateTaskRequestDto requestDto)
+    {
         return ResponseEntity.ok(taskService.createTask(requestDto));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TaskDto> updateTask(
+            @PathVariable String id,
+            @RequestBody UpdateTaskRequestDto requestDto)
+    {
+        return ResponseEntity.ok(taskService.updateTask(id, requestDto));
+    }
+
 
 }
