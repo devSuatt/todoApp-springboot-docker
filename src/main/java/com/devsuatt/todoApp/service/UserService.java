@@ -1,16 +1,12 @@
 package com.devsuatt.todoApp.service;
 
 import com.devsuatt.todoApp.dto.CreateUserRequestDto;
-import com.devsuatt.todoApp.dto.TaskDto;
 import com.devsuatt.todoApp.dto.UserDto;
 import com.devsuatt.todoApp.dto.converter.UserDtoConverter;
 import com.devsuatt.todoApp.exception.UserNotFoundException;
-import com.devsuatt.todoApp.model.Task;
 import com.devsuatt.todoApp.model.User;
 import com.devsuatt.todoApp.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
