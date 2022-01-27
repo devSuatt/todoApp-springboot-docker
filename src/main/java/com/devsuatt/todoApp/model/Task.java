@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data @Getter @Setter
+@Getter @Setter
 @Entity
 public class Task {
     @Id

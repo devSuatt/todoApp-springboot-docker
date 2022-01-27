@@ -9,7 +9,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data @Getter @Setter
+@Getter @Setter
 @Entity
 public class User {
     @Id

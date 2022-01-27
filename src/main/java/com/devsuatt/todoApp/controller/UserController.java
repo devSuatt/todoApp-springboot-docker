@@ -1,7 +1,6 @@
 package com.devsuatt.todoApp.controller;
 
-import com.devsuatt.todoApp.dto.CreateUserRequestDto;
-import com.devsuatt.todoApp.dto.UserDto;
+import com.devsuatt.todoApp.dto.*;
 import com.devsuatt.todoApp.service.UserService;
 import com.devsuatt.todoApp.shared.GenericResponse;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +34,17 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> getUsers() {
+    public ResponseEntity<List<UserViewDto>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
     }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<UserViewDto> updateUser(
+            @Valid @RequestBody UpdateUserRequestDto requestDto)
+    {
+        return ResponseEntity.ok(userService.updateUser(requestDto));
+    }
+
 
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUserById(

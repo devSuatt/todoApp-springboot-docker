@@ -3,6 +3,7 @@ package com.devsuatt.todoApp.service;
 import com.devsuatt.todoApp.dto.CreateTaskRequestDto;
 import com.devsuatt.todoApp.dto.TaskDto;
 import com.devsuatt.todoApp.dto.UpdateTaskRequestDto;
+import com.devsuatt.todoApp.dto.UserDto;
 import com.devsuatt.todoApp.dto.converter.TaskDtoConverter;
 import com.devsuatt.todoApp.exception.TaskNotFoundException;
 import com.devsuatt.todoApp.model.Task;
@@ -11,6 +12,7 @@ import com.devsuatt.todoApp.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Service
 public class TaskService {
@@ -29,6 +31,15 @@ public class TaskService {
         return taskRepository.findById(id)
                 .orElseThrow(() ->
                         new TaskNotFoundException("Task could not find by id: " + id));
+    }
+
+    public TaskDto getTaskById(String id) {
+        return converter.convert(taskRepository.getById(id));
+    }
+
+    public Set<TaskDto> getTasksByUserId(String id) {
+        UserDto userDto = userService.getUserById(id);
+        return userDto.getTasks();
     }
 
     public TaskDto createTask(CreateTaskRequestDto requestDto) {
@@ -54,10 +65,7 @@ public class TaskService {
 
     public void deleteTask(String id) {
         final Task task = findTaskById(id);
-        System.out.println("################################ => "+task.getId());
         taskRepository.deleteById(task.getId());
     }
-
-
 
 }

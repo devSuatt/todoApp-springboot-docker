@@ -9,9 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/v1/task")
+@RequestMapping("/v1")
 public class TaskController {
 
     private final TaskService taskService;
@@ -20,24 +21,37 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping("")
+    @GetMapping("/tasks/{id}")
+    public ResponseEntity<Set<TaskDto>> getTasksByUserId(
+            @PathVariable String id)
+    {
+        return ResponseEntity.ok(taskService.getTasksByUserId(id));
+    }
+
+    @GetMapping("/task/{id}")
+    public ResponseEntity<TaskDto> getTaskById(
+            @PathVariable String id)
+    {
+        return ResponseEntity.ok(taskService.getTaskById(id));
+    }
+
+    @PostMapping("/task")
     public ResponseEntity<TaskDto> createTask(
             @Valid @RequestBody CreateTaskRequestDto requestDto)
     {
         return ResponseEntity.ok(taskService.createTask(requestDto));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/task/{id}")
     public ResponseEntity<TaskDto> updateTask(
             @PathVariable String id,
-            @RequestBody UpdateTaskRequestDto requestDto)
+            @Valid @RequestBody UpdateTaskRequestDto requestDto)
     {
         return ResponseEntity.ok(taskService.updateTask(id, requestDto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/task/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
-        System.out.println("************************** => " + id);
         taskService.deleteTask(id);
         return ResponseEntity.ok(new GenericResponse("task deleted."));
     }

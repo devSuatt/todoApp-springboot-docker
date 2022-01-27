@@ -2,6 +2,7 @@ package com.devsuatt.todoApp.service;
 
 import com.devsuatt.todoApp.dto.CreateUserRequestDto;
 import com.devsuatt.todoApp.dto.UserDto;
+import com.devsuatt.todoApp.dto.UserViewDto;
 import com.devsuatt.todoApp.dto.converter.UserDtoConverter;
 import com.devsuatt.todoApp.exception.UserNotFoundException;
 import com.devsuatt.todoApp.model.User;

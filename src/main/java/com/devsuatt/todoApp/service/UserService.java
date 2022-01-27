@@ -1,7 +1,9 @@
 package com.devsuatt.todoApp.service;
 
 import com.devsuatt.todoApp.dto.CreateUserRequestDto;
+import com.devsuatt.todoApp.dto.UpdateUserRequestDto;
 import com.devsuatt.todoApp.dto.UserDto;
+import com.devsuatt.todoApp.dto.UserViewDto;
 import com.devsuatt.todoApp.dto.converter.UserDtoConverter;
 import com.devsuatt.todoApp.exception.UserNotFoundException;
 import com.devsuatt.todoApp.model.User;
@@ -22,10 +24,10 @@ public class UserService {
         this.userDtoConverter = userDtoConverter;
     }
 
-    public List<UserDto> getUsers() {
+    public List<UserViewDto> getUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(user -> userDtoConverter.convert(user))
+                .map(user -> userDtoConverter.convertToViewDto(user))
                 .collect(Collectors.toList());
     }
 
@@ -44,6 +46,13 @@ public class UserService {
                 requestDto.getPassword(),
                 new HashSet<>()));
         return userDtoConverter.convert(userRepository.save(user));
+    }
+
+    public UserViewDto updateUser(UpdateUserRequestDto requestDto) {
+        final User user = findUserById(requestDto.getId());
+        user.setUsername(requestDto.getUsername());
+        user.setPassword(requestDto.getPassword());
+        return userDtoConverter.convertToViewDto(userRepository.save(user));
     }
 
     public void deleteUserById(String id) {
