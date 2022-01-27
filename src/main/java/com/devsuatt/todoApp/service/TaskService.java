@@ -32,7 +32,7 @@ public class TaskService {
     }
 
     public TaskDto createTask(CreateTaskRequestDto requestDto) {
-        User user = userService.findCustomerById(requestDto.getUserId());
+        User user = userService.findUserById(requestDto.getUserId());
         Task task = new Task(requestDto.getTaskHeader(),
                 requestDto.getTaskDescription(),
                 LocalDateTime.now(),
@@ -42,7 +42,7 @@ public class TaskService {
     }
 
     public TaskDto updateTask(String id, UpdateTaskRequestDto requestDto) {
-        User user = userService.findCustomerById(requestDto.getUserId());
+        User user = userService.findUserById(requestDto.getUserId());
         Task task = new Task(id,
                 requestDto.getTaskHeader(),
                 requestDto.getTaskDescription(),

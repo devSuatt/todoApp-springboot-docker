@@ -29,13 +29,13 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    protected User findCustomerById(String id) {
+    protected User findUserById(String id) {
         return userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User could not find by id: " + id));
     }
 
     public UserDto getUserById(String userId) {
-        return userDtoConverter.convert(findCustomerById(userId));
+        return userDtoConverter.convert(findUserById(userId));
     }
 
     public UserDto createUser(CreateUserRequestDto requestDto) {
@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public void deleteUserById(String id) {
-        final User user = findCustomerById(id);
+        final User user = findUserById(id);
         userRepository.deleteById(user.getId());
     }
 
