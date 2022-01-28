@@ -9,7 +9,7 @@ This project provides to CRUD operations for users and users' tasks.
 - [x] H2 Database
 - [x] Documented on Swagger
 - [x] Maven
-- [x] Dockerized and publish on Docker Hub
+- [x] Dockerized and published on Docker Hub
 - [x] Unit tests using JUnit and Mockito
 
 There are 5 endpoints in user-controller:
