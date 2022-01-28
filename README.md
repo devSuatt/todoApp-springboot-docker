@@ -47,6 +47,14 @@ Swagger UI will be run on this url
 
 `http://localhost:${PORT}/swagger-ui.html`
 
+### Docker Hub
+
+You can pull this application from Docker Hub
+
+Link: https://hub.docker.com/r/devsuatt16/todoapp
+
+`docker pull devsuatt16/todoapp`
+
 ### Docker Build
 
 `docker build --compress --force-rm -t {Docker_Hub_Username}/{Docker_Hub_RepoName}:{Tag} .`
@@ -56,12 +64,4 @@ Example: `docker build . -t todoapp:1.0`
 Run Docker image locally on a container with a name for the container.
 
 `docker run --name todoapp -d -p 9090:8080 todoapp:1.0`
-
-### Docker Hub
-
-You can pull this application from Docker Hub
-
-Link: https://hub.docker.com/r/devsuatt16/todoapp
-
-`docker pull devsuatt16/todoapp`
 
