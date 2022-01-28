@@ -3,7 +3,8 @@ package com.devsuatt.todoApp.controller;
 import com.devsuatt.todoApp.dto.CreateTaskRequestDto;
 import com.devsuatt.todoApp.dto.TaskDto;
 import com.devsuatt.todoApp.dto.UpdateTaskRequestDto;
-import com.devsuatt.todoApp.service.TaskService;
+import com.devsuatt.todoApp.service.concrete.TaskManager;
+import com.devsuatt.todoApp.service.zabstract.TaskService;
 import com.devsuatt.todoApp.shared.GenericResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
+    public TaskController(TaskManager taskManager) {
+        this.taskService = taskManager;
     }
 
     @GetMapping("/tasks/{id}")
@@ -53,7 +54,8 @@ public class TaskController {
     @DeleteMapping("/task/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable("id") String id) {
         taskService.deleteTask(id);
-        return ResponseEntity.ok(new GenericResponse("task deleted."));
+        GenericResponse response = new GenericResponse("task deleted");
+        return ResponseEntity.ok(response);
     }
 
 }

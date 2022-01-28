@@ -1,7 +1,7 @@
 package com.devsuatt.todoApp.controller;
 
 import com.devsuatt.todoApp.dto.*;
-import com.devsuatt.todoApp.service.UserService;
+import com.devsuatt.todoApp.service.zabstract.UserService;
 import com.devsuatt.todoApp.shared.GenericResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +51,8 @@ public class UserController {
             @PathVariable String id)
     {
         userService.deleteUserById(id);
-        return ResponseEntity.ok(new GenericResponse("user deleted"));
+        GenericResponse response = new GenericResponse("user deleted");
+        return ResponseEntity.ok(response);
     }
 
 }

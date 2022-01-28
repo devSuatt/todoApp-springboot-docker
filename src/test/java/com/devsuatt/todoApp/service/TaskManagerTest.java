@@ -5,22 +5,21 @@ import com.devsuatt.todoApp.dto.CreateTaskRequestDto;
 import com.devsuatt.todoApp.dto.TaskDto;
 import com.devsuatt.todoApp.dto.converter.TaskDtoConverter;
 import com.devsuatt.todoApp.exception.TaskNotFoundException;
-import com.devsuatt.todoApp.exception.UserNotFoundException;
 import com.devsuatt.todoApp.model.Task;
 import com.devsuatt.todoApp.model.TaskType;
 import com.devsuatt.todoApp.model.User;
 import com.devsuatt.todoApp.repository.TaskRepository;
+import com.devsuatt.todoApp.service.concrete.TaskManager;
+import com.devsuatt.todoApp.service.zabstract.TaskService;
+import com.devsuatt.todoApp.service.zabstract.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.beans.Customizer;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.mockito.Mockito.mock;
 
@@ -38,7 +37,7 @@ class TaskServiceTest extends TestSupport {
         userService = mock(UserService.class);
         converter = mock(TaskDtoConverter.class);
 
-        taskService = new TaskService(taskRepository, userService, converter);
+        taskService = new TaskManager(taskRepository, userService, converter);
     }
 
     @Test

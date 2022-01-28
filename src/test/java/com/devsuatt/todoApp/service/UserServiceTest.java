@@ -2,11 +2,12 @@ package com.devsuatt.todoApp.service;
 
 import com.devsuatt.todoApp.dto.CreateUserRequestDto;
 import com.devsuatt.todoApp.dto.UserDto;
-import com.devsuatt.todoApp.dto.UserViewDto;
 import com.devsuatt.todoApp.dto.converter.UserDtoConverter;
 import com.devsuatt.todoApp.exception.UserNotFoundException;
 import com.devsuatt.todoApp.model.User;
 import com.devsuatt.todoApp.repository.UserRepository;
+import com.devsuatt.todoApp.service.concrete.UserManager;
+import com.devsuatt.todoApp.service.zabstract.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,7 +27,7 @@ class UserServiceTest {
     public void setUp() {
         userRepository = mock(UserRepository.class);
         converter = mock(UserDtoConverter.class);
-        userService = new UserService(userRepository, converter);
+        userService = new UserManager(userRepository, converter);
     }
 
     @Test

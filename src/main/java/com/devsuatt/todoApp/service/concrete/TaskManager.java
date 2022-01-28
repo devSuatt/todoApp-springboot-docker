@@ -1,4 +1,4 @@
-package com.devsuatt.todoApp.service;
+package com.devsuatt.todoApp.service.concrete;
 
 import com.devsuatt.todoApp.dto.CreateTaskRequestDto;
 import com.devsuatt.todoApp.dto.TaskDto;
@@ -9,25 +9,27 @@ import com.devsuatt.todoApp.exception.TaskNotFoundException;
 import com.devsuatt.todoApp.model.Task;
 import com.devsuatt.todoApp.model.User;
 import com.devsuatt.todoApp.repository.TaskRepository;
+import com.devsuatt.todoApp.service.zabstract.TaskService;
+import com.devsuatt.todoApp.service.zabstract.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Service
-public class TaskService {
+public class TaskManager implements TaskService {
 
     private final TaskRepository taskRepository;
     private final UserService userService;
     private final TaskDtoConverter converter;
 
-    public TaskService(TaskRepository taskRepository, UserService userService, TaskDtoConverter converter) {
+    public TaskManager(TaskRepository taskRepository, UserService userService, TaskDtoConverter converter) {
         this.taskRepository = taskRepository;
         this.userService = userService;
         this.converter = converter;
     }
 
-    protected Task findTaskById(String id) {
+    public Task findTaskById(String id) {
         return taskRepository.findById(id)
                 .orElseThrow(() ->
                         new TaskNotFoundException("Task could not find by id: " + id));
