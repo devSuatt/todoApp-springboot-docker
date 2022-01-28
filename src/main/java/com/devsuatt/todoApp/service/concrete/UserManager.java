@@ -42,10 +42,10 @@ public class UserManager implements UserService {
     }
 
     public UserDto createUser(CreateUserRequestDto requestDto) {
-        final User user = userRepository.save(new User( "",
+        final User user = new User( "",
                 requestDto.getUsername(),
                 requestDto.getPassword(),
-                new HashSet<>()));
+                new HashSet<>());
         return userDtoConverter.convert(userRepository.save(user));
     }
 
